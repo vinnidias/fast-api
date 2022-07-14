@@ -1,3 +1,4 @@
+from typing import final
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime
@@ -27,7 +28,9 @@ def server_is_running():
 @app.get("/current_time")
 def current_time():
     time_now = datetime.now().strftime("%H:%M")
+    hours = int(time_now.split(":")[0]) -3 
+    convert_time = f'{hours}:{time_now.split(":")[1]}'
     return {
-        "current_time": time_now
+        "current_time": convert_time
     }
 
